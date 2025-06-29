@@ -4,7 +4,7 @@
     <!-- Logo -->
     <a href="<?= base_url() ?>" class="logo d-flex align-items-center me-auto me-xl-0">
       <i class="bi bi-fork-knife"></i>
-      <h1 class="sitename">NiceRestaurant</h1>
+      <h1 class="sitename">Ember & Oak</h1>
     </a>
 
     <!-- Nav Menu -->
@@ -21,13 +21,19 @@
             </a>
         </li>
          <li class="nav-item">
-            <a class="nav-link <?php echo (uri_string() == '') ? "menu" : "collapsed" ?>" href="menu">
+            <a class="nav-link <?php echo (uri_string() == '') ? "menu" : "collapsed" ?>" href="#menu">
                 <span>Menu</span>
             </a>
-        </li><!-- End Home Nav -->
+        </li>
+          </li>
+         <li class="nav-item">
+            <a class="nav-link <?php echo (uri_string() == '') ? "menu" : "collapsed" ?>" href="keranjang">
+                <span>keranjang</span>
+            </a>
+        </li>
 
         <?php if (session()->get('role') == 'admin') : ?>
-          <li><a href="keranjang"><i></i>keranjang</a></li>
+          <li><a href="produk"><i></i>Produk</a></li>
         <?php endif; ?>
 
          <li class="nav-item">

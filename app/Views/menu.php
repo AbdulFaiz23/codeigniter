@@ -1,185 +1,36 @@
 <?= $this->extend('layout') ?>
 <?= $this->section('content') ?>
-<div class="row">
-    <?php foreach ($product as $key => $item) : ?>
-        <div class="col-lg-6">
-            <div class="card">
-                <div class="card-body">
-                    <img src="<?php echo base_url() . "img/" . $item['foto'] ?>" alt="..." width="100%">
-                    <h5 class="card-title"><?php echo $item['nama'] ?><br><?php echo $item['harga'] ?></h5>
+
+<?php if (session()->getFlashData('success')) : ?>
+    <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+        <?= session()->getFlashData('success') ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php endif; ?>
+
+<div class="container py-5">
+    <div class="row g-4">
+        <?php foreach ($product as $key => $item) : ?>
+            <div class="col-lg-4 col-md-6">
+                <?= form_open('keranjang') ?>
+                <?php
+                echo form_hidden('id', $item['id']);
+                echo form_hidden('nama', $item['nama']);
+                echo form_hidden('harga', $item['harga']);
+                echo form_hidden('foto', $item['foto']);
+                ?>
+                <div class="card shadow rounded-4 h-100 d-flex flex-column justify-content-between">
+                    <div class="card-body text-center">
+                        <img src="<?= base_url('img/' . $item['foto']) ?>" alt="<?= esc($item['nama']) ?>" class="img-fluid rounded mb-3" style="max-height: 200px; object-fit: contain;">
+                        <h5 class="card-title text-primary fw-bold mb-2"><?= esc($item['nama']) ?></h5>
+                        <p class="card-text mb-3 text-success fw-semibold"><?= number_to_currency($item['harga'], 'IDR') ?></p>
+                        <button type="submit" class="btn btn-warning text-dark rounded-pill px-4">Beli</button>
+                    </div>
                 </div>
+                <?= form_close() ?>
             </div>
-        </div>
-    <?php endforeach ?>
+        <?php endforeach ?>
+    </div>
 </div>
-<!-- Menu Section -->
-    <section id="menu" class="menu section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Menu</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
-
-      <div class="container" data-aos="fade-up">
-
-        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
-
-          <div class="menu-filters isotope-filters mb-5">
-            <ul>
-              <li data-filter="*" class="filter-active">All</li>
-              <li data-filter=".filter-starters">Starters</li>
-              <li data-filter=".filter-main">Main Courses</li>
-              <li data-filter=".filter-dessert">Desserts</li>
-              <li data-filter=".filter-drinks">Drinks</li>
-            </ul>
-          </div>
-
-          <div class="menu-container isotope-container row gy-4">
-
-            <!-- Regular Menu Items -->
-            <div class="col-lg-6 isotope-item filter-starters">
-              <div class="menu-item d-flex align-items-center gap-4">
-                <img src="<?= base_url()?>NiceRestaurant/assets/img/restaurant/starter-2.webp" alt="Starter" class="menu-img img-fluid rounded-3">
-                <div class="menu-content">
-                  <h5>Bruschetta Trio <span class="menu-tag">Vegetarian</span></h5>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit curabitur sed.</p>
-                  <div class="price">$8.95</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-6 isotope-item filter-starters">
-              <div class="d-flex menu-item align-items-center gap-4">
-                <img src="<?= base_url()?>NiceRestaurant/assets/img/restaurant/starter-5.webp" alt="Starter" class="menu-img img-fluid rounded-3">
-                <div class="menu-content">
-                  <h5>Calamari Fritti <span class="menu-tag">Seafood</span></h5>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit curabitur sed.</p>
-                  <div class="price">$10.95</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-6 isotope-item filter-main">
-              <div class="d-flex menu-item align-items-center gap-4">
-                <img src="<?= base_url()?>NiceRestaurant/assets/img/restaurant/main-1.webp" alt="Main Course" class="menu-img img-fluid rounded-3">
-                <div class="menu-content">
-                  <h5>Wild Mushroom Risotto <span class="menu-tag">Vegetarian</span></h5>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit curabitur sed.</p>
-                  <div class="price">$18.95</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-6 isotope-item filter-main">
-              <div class="d-flex menu-item align-items-center gap-4">
-                <img src="<?= base_url()?>NiceRestaurant/assets/img/restaurant/main-4.webp" alt="Main Course" class="menu-img img-fluid rounded-3">
-                <div class="menu-content">
-                  <h5>Braised Lamb Shank <span class="menu-tag">Chef's Choice</span></h5>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit curabitur sed.</p>
-                  <div class="price">$26.95</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-6 isotope-item filter-dessert">
-              <div class="d-flex menu-item align-items-center gap-4">
-                <img src="<?= base_url()?>NiceRestaurant/assets/img/restaurant/dessert-2.webp" alt="Dessert" class="menu-img img-fluid rounded-3">
-                <div class="menu-content">
-                  <h5>Chocolate Lava Cake <span class="menu-tag">Gluten Free</span></h5>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit curabitur sed.</p>
-                  <div class="price">$9.95</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-6 isotope-item filter-dessert">
-              <div class="d-flex menu-item align-items-center gap-4">
-                <img src="<?= base_url()?>NiceRestaurant/assets/img/restaurant/dessert-7.webp" alt="Dessert" class="menu-img img-fluid rounded-3">
-                <div class="menu-content">
-                  <h5>Tiramisu <span class="menu-tag">Classic</span></h5>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit curabitur sed.</p>
-                  <div class="price">$8.95</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-6 isotope-item filter-drinks">
-              <div class="d-flex menu-item align-items-center gap-4">
-                <img src="<?= base_url()?>NiceRestaurant/assets/img/restaurant/drink-3.webp" alt="Drink" class="menu-img img-fluid rounded-3">
-                <div class="menu-content">
-                  <h5>Signature Cocktail <span class="menu-tag">Alcoholic</span></h5>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit curabitur sed.</p>
-                  <div class="price">$12.95</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-6 isotope-item filter-drinks">
-              <div class="d-flex menu-item align-items-center gap-4">
-                <img src="<?= base_url()?>NiceRestaurant/assets/img/restaurant/drink-8.webp" alt="Drink" class="menu-img img-fluid rounded-3">
-                <div class="menu-content">
-                  <h5>Berry Smoothie <span class="menu-tag">Non-Alcoholic</span></h5>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit curabitur sed.</p>
-                  <div class="price">$7.95</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="text-center mt-5" data-aos="fade-up">
-          <a href="#" class="download-menu">
-            <i class="bi bi-file-earmark-pdf"></i> Download Full Menu
-          </a>
-        </div>
-
-        <!-- Chef's Specials -->
-        <div class="col-12 mt-5" data-aos="fade-up">
-          <div class="specials-badge">
-            <span><i class="bi bi-award"></i> Chef's Specials</span>
-          </div>
-          <div class="specials-container">
-            <div class="row g-4">
-              <div class="col-md-6">
-                <div class="menu-item special-item">
-                  <div class="menu-item-img">
-                    <img src="<?= base_url()?>NiceRestaurant/assets/img/restaurant/main-3.webp" alt="Special Dish" class="img-fluid">
-                    <div class="menu-item-badges">
-                      <span class="badge-special">Special</span>
-                      <span class="badge-vegan">Vegan</span>
-                    </div>
-                  </div>
-                  <div class="menu-item-content">
-                    <h4>Mediterranean Grilled Salmon</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ut aliquam metus. Vivamus fermentum magna quis.</p>
-                    <div class="menu-item-price">$24.99</div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="menu-item special-item">
-                  <div class="menu-item-img">
-                    <img src="<?= base_url()?>NiceRestaurant/assets/img/restaurant/main-7.webp" alt="Special Dish" class="img-fluid">
-                    <div class="menu-item-badges">
-                      <span class="badge-special">Special</span>
-                      <span class="badge-spicy">Spicy</span>
-                    </div>
-                  </div>
-                  <div class="menu-item-content">
-                    <h4>Signature Ribeye Steak</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam accumsan risus ut dui pretium, eget elementum nisi.</p>
-                    <div class="menu-item-price">$32.99</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-    </section><!-- /Menu Section -->
 
 <?= $this->endSection() ?>

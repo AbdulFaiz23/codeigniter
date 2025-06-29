@@ -20,7 +20,7 @@ $password = [
 
              <a href="<?= base_url() ?>" class="logo d-flex align-items-center me-auto me-xl-0 text-decoration-none mb-4">
                 <i class="bi bi-fork-knife fs-3 text-warning me-2"></i>
-                <h1 class="sitename h4 text-light fw-bold m-0">NiceRestaurant</h1>
+                <h1 class="sitename h4 text-light fw-bold m-0">Ember & Oak</h1>
               </a>
 
 
